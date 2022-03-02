@@ -1,5 +1,5 @@
 <template>
-<v-container :fill-height="!isMobile" fluid>
+<v-container class="grey lighten-2" :fill-height="!isMobile" fluid>
     <v-snackbar v-model="snackbar" top :timeout="4000" class="white--text">
         {{ text }}
     </v-snackbar>
@@ -149,9 +149,16 @@ export default {
                     this.loading = false
                     this.text = "Vous êtes connectés avec succès"
                     this.snackbar = true
-                    this.user = res.data
+                    this.user = res.data.user
+                    this.$store.commit("saveUG_C", res.data.token)
+                    console.log(this.$store.state.ug_c)
+
                     this.reset()
                     console.log(res.data)
+                    this.$router.push({
+                        name: 'Home'
+                    })
+
                 })
                 .catch(err => {
                     if ("password" in err.response.data) {

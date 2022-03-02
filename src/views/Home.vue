@@ -1,15 +1,15 @@
 <template>
-  <hello-world />
+<v-container :fluid="isMobile" class="grey lighten-3">
+    <h1>Dashboard</h1>
+
+</v-container>
 </template>
 
 <script>
-import HelloWorld from "../components/HelloWorld";
 
 export default {
-  name: "Home",
+    name: "Home",
 
-  components: {
-    HelloWorld,
-  },
+   
 };
 </script>
