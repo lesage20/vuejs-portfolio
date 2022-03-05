@@ -1,9 +1,9 @@
 <template>
 <v-card>
-    <v-app-bar app color="grey darken-4 rounded-0" dark flat v-if="isMobile">
+    <v-app-bar app color="grey darken-4 rounded-0" dense dark flat>
         <v-app-bar-nav-icon @click="draw = true"></v-app-bar-nav-icon>
         <v-app-bar-title class="text-uppercase">
-            Kouakou btp
+            SageCoders
         </v-app-bar-title>
     </v-app-bar>
     <template v-if="$route.name != 'Auth'">
@@ -12,7 +12,7 @@
             <v-list-item>
                 <v-list-item-content>
                     <v-list-item-title class="text-h6">
-                        Kouakou btp
+                        SageCoders
                     </v-list-item-title>
                     <v-list-item-subtitle>
                         Portfolio
@@ -34,6 +34,13 @@
                 </v-list-item>
 
             </v-list>
+            <template v-slot:append>
+                <div class="pa-2">
+                    <v-btn block @click="logout">
+                        <v-icon small left>mdi-logout</v-icon> Deconnexion
+                    </v-btn>
+                </div>
+            </template>
         </v-navigation-drawer>
     </template>
 
@@ -41,6 +48,7 @@
 </template>
 
 <script>
+import axios from "axios"
 export default {
     data: () => ({
 
@@ -77,10 +85,23 @@ export default {
         right: null,
 
     }),
-    created() {
-        console.log(this.$route.name == "Auth")
+    methods: {
+        logout() {
+            axios.post(this.authAPI + "logout/")
+                .then(() => {
+                        this.$store.commit('resetUG_C')
+                        this.$router.push({name: "Auth"})
+                        }
+
+                    )
+                    .catch(err => console.dir(err))
+
+                },
+        },
+        created() {
+            console.log(this.$route.name == "Auth")
+        }
     }
-}
 </script>
 
 <style>

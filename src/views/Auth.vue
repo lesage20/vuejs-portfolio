@@ -1,8 +1,9 @@
 <template>
 <v-container class="grey lighten-2" :fill-height="!isMobile" fluid>
-    <v-snackbar v-model="snackbar" top :timeout="4000" class="white--text">
+    <v-snackbar v-model="snackbar" botton :timeout="4000" class="white--text">
         {{ text }}
     </v-snackbar>
+    
     <v-row justify="center" align="center" :class="isMobile ? 'mgt-middle' : ''">
         <v-col cols="12" sm="" md="6" class="mx-auto">
             <v-card elevation="12">
@@ -22,7 +23,7 @@
                                                 <v-text-field v-model="username" color="blue accent-3" label="Nom d'utilisateur" prepend-icon="mdi-account" />
                                             </v-col>
                                             <v-col>
-                                                <v-text-field v-model="password" color="blue accent-3" label="Mot de passe" prepend-icon="mdi-lock" type="password" />
+                                                <v-text-field v-model="password" color="blue accent-3" label="Mot de passe" prepend-icon="mdi-lock" type="password" @keyup.enter="login()" />
                                             </v-col>
                                         </v-row>
                                     </v-form>

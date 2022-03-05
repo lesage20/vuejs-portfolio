@@ -1,16 +1,17 @@
 <template>
 <v-app>
-    <!-- <v-app-bar transparent  >
-      <div class="d-flex align-center">
-
-        
-      </div>
-
-      <v-spacer></v-spacer>
-    </v-app-bar> -->
+    <v-dialog>
+        <v-card>
+            <v-card-text>
+                Votre session a expiré veuillez vous reconnecter
+            </v-card-text>
+        </v-card>
+    </v-dialog>
     <navbar />
     <v-main class="grey lighten-3">
-        <router-view />
+        <v-fade-transition hide-on-leave origin="center center" appear>
+            <router-view />
+        </v-fade-transition>
     </v-main>
 </v-app>
 </template>
@@ -18,6 +19,7 @@
 <script>
 import Vue from 'vue'
 import Navbar from './components/Navbar.vue';
+import axios from "axios"
 Vue.mixin({
     data: () => ({
         // authAPI: "http://127.0.0.1:8000/auth/",
@@ -47,5 +49,28 @@ export default {
     name: "App",
 
     data: () => ({}),
+    created() {
+        console.log(this.ug_c)
+        axios
+            .post(this.authAPI + "token-verify/", {
+                token: this.ug_c,
+            })
+            .then()
+            .catch(err => {
+                console.log(location.href)
+                if (err.response.status == "400") {
+                    if (location.href == location.origin + '/auth') {
+                        return
+                    } else {
+                        alert("Votre session a expiré. Veuillez vous reconnecter.")
+                        this.$router.push({
+                            name: 'Auth'
+                        })
+                    }
+                }
+                console.dir(err)
+            })
+
+    }
 };
 </script>
