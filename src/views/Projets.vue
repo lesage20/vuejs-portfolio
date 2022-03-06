@@ -201,13 +201,16 @@ export default {
     },
     created() {
         this.getTasks()
+        setTimeout(() => {
+            this.getProjects()
+        }, 120)
+        // while (this.taches) {
+        //     if (this.taches.length) {
+        //         this.getProjects()
 
-        while (1==1) {
-            if (this.taches.length) {
-                this.getProjects()
-                break
-            }
-        }
+        //         break
+        //     }
+        // }
     },
 
 }
