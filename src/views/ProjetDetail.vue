@@ -12,65 +12,17 @@
             </v-card>
         </v-col>
     </v-row>
-    <!-- <v-row>
-        <v-col cols="3">
-            <v-card>
-                <v-card-subtitle class="text-center">
-                    <v-icon color="success">mdi-check-decagram</v-icon> Tâches terminées
-                </v-card-subtitle>
-                <v-divider></v-divider>
-                <v-card-text>
-                    <h4 class="text-center">
-                        {{taches_termines.length}}
-
-                    </h4>
-                </v-card-text>
-            </v-card>
+    <v-row v-if="images.length">
+        <v-col cols="12">
+            <v-label label="Apercu du chentier" />
+            <slider-carouselle :items="images" />
         </v-col>
-        <v-col cols="3">
-            <v-card>
-                <v-card-subtitle class="text-center">
-                    <v-icon color="warning">mdi-sync</v-icon> Tâches en cours
-                </v-card-subtitle>
-                <v-divider></v-divider>
-                <v-card-text>
-                    <h4 class="text-center">
-                        {{taches_en_cours.length}}
+    </v-row>
+    <v-row>
+        <v-col cols="12">
+            <v-label label="Quelques chiffres utiles" />
 
-                    </h4>
-                </v-card-text>
-            </v-card>
         </v-col>
-        <v-col cols="3">
-            <v-card>
-                <v-card-subtitle class="text-center">
-                    <v-icon color="error">mdi-pause-circle</v-icon> Tâches en attentes
-                </v-card-subtitle>
-                <v-divider></v-divider>
-                <v-card-text>
-                    <h4 class="text-center">
-                        {{taches_en_attente.length}}
-
-                    </h4>
-                </v-card-text>
-            </v-card>
-        </v-col>
-        <v-col cols="3">
-            <v-card>
-                <v-card-subtitle class="text-center">
-                    <v-icon color="blue">mdi-calculator-variant</v-icon> Total tâches:
-                </v-card-subtitle>
-                <v-divider></v-divider>
-                <v-card-text>
-                    <h4 class="text-center">
-                        {{taches.length}}
-
-                    </h4>
-                </v-card-text>
-            </v-card>
-        </v-col>
-    </v-row> -->
-    <v-row class="mt-5">
 
         <v-col lg="3" md="6" sm="6" cols="12" class="mt-xs-4">
             <v-card dark elevation="0" color="success darken-1">
@@ -187,9 +139,11 @@
         </v-col>
     </v-row>
     <v-row>
-        <v-col>
-            <p class="grey--text py-1 my-0">Tâches</p>
+        <v-col cols="12">
+            <v-label label="Liste de tâches selon le statut" />
 
+        </v-col>
+        <v-col class="my-0 py-0">
             <v-card>
                 <v-tabs v-model="tab">
                     <v-tabs-slider></v-tabs-slider>
@@ -288,12 +242,28 @@
             </v-card>
         </v-col>
     </v-row>
+    <v-row>
+        <v-col cols="12">
+            <v-label label="Timeline exprimant l'avancée du projet" /> 
+        </v-col>
+        <v-col cols="12">
+            <time-line :items="taches" />
+        </v-col>
+    </v-row>
 </v-container>
 </template>
 
 <script>
 import axios from 'axios'
+import SliderCarouselle from '../components/SliderCarouselle.vue'
+import VLabel from '../components/Label.vue'
+import TimeLine from '../components/TimeLine.vue'
 export default {
+    components: {
+        SliderCarouselle,
+        VLabel,
+        TimeLine
+    },
     name: "ProjetDetail",
     data: () => ({
         termines: 0,
