@@ -32,6 +32,9 @@
 </v-container>
 </template>
 
+    <TimeLine />
+  </div>
+</template>
 <script>
 // import SliderCarouselle from "@/components/SliderCarouselle.vue";
 import TimeLine from "@/components/TimeLine.vue";
