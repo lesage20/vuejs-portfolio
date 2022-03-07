@@ -204,6 +204,13 @@ export default {
         setTimeout(() => {
             this.getProjects()
         }, 120)
+        // while (this.taches) {
+        //     if (this.taches.length) {
+        //         this.getProjects()
+
+        //         break
+        //     }
+        // }
     },
 
 }
