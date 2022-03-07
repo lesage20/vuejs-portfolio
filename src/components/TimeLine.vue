@@ -40,12 +40,12 @@ export default {
         }
     },
     mounted() {
-        while (this.items) {
+        setTimeout(() => {
             if (this.items.length) {
                 this.itemsByStatus()
-                break
             }
-        }
+        },  300)
+
     }
 };
 </script>

@@ -244,7 +244,7 @@
     </v-row>
     <v-row>
         <v-col cols="12">
-            <v-label label="Timeline exprimant l'avancée du projet" /> 
+            <v-label label="Timeline exprimant l'avancée du projet" />
         </v-col>
         <v-col cols="12">
             <time-line :items="taches" />
@@ -293,14 +293,43 @@ export default {
 
     },
     methods: {
+        initializeData() {
+            let urls = [this.dataAPI + "taches/", this.dataAPI + "projets/" + `${this.$route.params.id}`, this.dataAPI + "images/"]
+
+            Promise.all(urls.map((endpoint) => axios.get(endpoint, {
+                headers: {
+                    Authorization: "Bearer " + this.ug_c.token
+                }
+            }))).then((
+                [{
+                    data: taches
+                }, {
+                    data: projet
+                }, {
+                    data: images
+                }]
+            ) => {
+                this.projet = projet
+                this.images = images.filter(img => img.tache.projet.id == this.projet.id)
+                this.taches = taches.filter(t => t.projet.id == this.projet.id)
+                for (let tache of this.taches) {
+                    if (tache.status == "terminée") {
+                        this.taches_termines.push(tache)
+                    } else if (tache.status == "en cours") {
+                        this.taches_en_cours.push(tache)
+                    } else if (tache.status == "en attente") {
+                        this.taches_en_attente.push(tache)
+                    }
+                }
+            })
+        },
         getTasks() {
 
             axios.get(this.dataAPI + "taches/", {
                     headers: {
-                        Authorization: "Bearer " + this.ug_c
+                        Authorization: "Bearer " + this.ug_c.token
                     }
                 }).then(res => {
-                    console.log('taches: \n', res.data)
                     this.taches = res.data.filter(t => t.projet.id == this.projet.id)
                     for (let tache of this.taches) {
                         if (tache.status == "terminée") {
@@ -311,7 +340,6 @@ export default {
                             this.taches_en_attente.push(tache)
                         }
                     }
-                    console.log('taches du projet: \n', this.taches)
                 })
                 .catch(err => {
                     console.dir(err)
@@ -319,15 +347,15 @@ export default {
 
         },
         getProject() {
+
             axios
                 .get(this.dataAPI + "projets/" + `${this.$route.params.id}`, {
                     headers: {
-                        Authorization: "Bearer " + this.ug_c
+                        Authorization: "Bearer " + this.ug_c.token
                     }
                 })
                 .then(res => {
                     this.projet = res.data
-                    console.log(res.data)
 
                 })
                 .catch(err => {
@@ -338,12 +366,11 @@ export default {
             axios
                 .get(this.dataAPI + "images/", {
                     headers: {
-                        Authorization: "Bearer " + this.ug_c
+                        Authorization: "Bearer " + this.ug_c.token
                     }
                 })
                 .then(res => {
                     this.images = res.data.filter(img => img.tache.projet.id == this.projet.id)
-                    console.log("img: \n", this.images)
                 })
                 .catch(err => {
                     console.dir(err)
@@ -356,17 +383,9 @@ export default {
         }
     },
     created() {
-        this.getProject()
-        setTimeout(() => {
-            this.getImages()
-
-        }, 100)
-
+        this.initializeData()
     },
-    mounted() {
 
-        this.getTasks()
-    }
 }
 </script>
 

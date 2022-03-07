@@ -3,7 +3,7 @@
     <v-snackbar v-model="snackbar" botton :timeout="4000" class="white--text">
         {{ text }}
     </v-snackbar>
-    
+
     <v-row justify="center" align="center" :class="isMobile ? 'mgt-middle' : ''">
         <v-col cols="12" sm="" md="6" class="mx-auto">
             <v-card elevation="12">
@@ -151,7 +151,7 @@ export default {
                     this.text = "Vous êtes connectés avec succès"
                     this.snackbar = true
                     this.user = res.data.user
-                    this.$store.commit("saveUG_C", res.data.token)
+                    this.$store.commit("saveUser", res.data)
                     console.log(this.$store.state.ug_c)
 
                     this.reset()
@@ -193,8 +193,7 @@ export default {
                     this.loading = false
                     this.text = "Vous êtes connectés avec succès"
                     this.snackbar = true
-                    this.user = res.data
-                    console.log(res.data)
+                    this.user = res.data.
                     this.reset()
                 })
                 .catch(err => {

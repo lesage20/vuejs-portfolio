@@ -89,7 +89,7 @@ export default {
         logout() {
             axios.post(this.authAPI + "logout/")
                 .then(() => {
-                        this.$store.commit('resetUG_C')
+                        this.$store.commit('resetToken')
                         this.$router.push({name: "Auth"})
                         }
 

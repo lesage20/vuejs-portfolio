@@ -144,73 +144,55 @@ export default {
             if (status == "en attente") return "error"
             if (status == "en cours") return "warning"
             if (status == "terminée") return "success"
-
         },
         getTasks() {
-
             axios.get(this.dataAPI + "taches/", {
                     headers: {
-                        Authorization: "Bearer " + this.ug_c
+                        Authorization: "Bearer " + this.ug_c.token
                     }
                 }).then(res => {
                     this.taches = res.data
-                    console.log(this.taches)
                 })
                 .catch(err => {
                     console.dir(err)
                 })
 
         },
-        getProjects() {
+        initializeData() {
             this.loading = true
             this.dataDialog = true
-            axios
-                .get(this.dataAPI + "projets/", {
-                    headers: {
-                        Authorization: "Bearer " + this.ug_c
+            let urls = [this.dataAPI + "taches/", this.dataAPI + "projets/"]
+            Promise.all(urls.map((endpoint) => axios.get(endpoint, {
+                headers: {
+                    Authorization: "Bearer " + this.ug_c.token
+                }
+            }))).then(([{
+                    data: taches
+                },
+                {
+                    data: projets
+                }
+            ]) => {
+                this.taches = taches
+                projets.forEach(element => {
+                    element.tache_array = this.taches.filter(t => t.projet.id == element.id)
+                    element.tache_accomp = element.tache_array.filter(tache => tache.status == "terminée")
+                    element.tache_en_cours = element.tache_array.filter(tache => tache.status == "en cours")
+                    element.progression = ((element.tache_accomp.length || 0) / element.tache_array.length) * 100
+                    element.buffer = element.progression + ((element.tache_en_cours.length || 0) / element.tache_array.length) * 100
+                    if (element.tache_array.length > 3) {
+                        element.tache_array = element.tache_array.splice(0, 3)
                     }
                 })
-                .then(res => {
-                    res.data.forEach(element => {
-                        element.tache_array = this.taches.filter(t => t.projet.id == element.id)
-                        element.tache_accomp = element.tache_array.filter(tache => tache.status == "terminée")
-                        element.tache_en_cours = element.tache_array.filter(tache => tache.status == "en cours")
-                        element.progression = ((element.tache_accomp.length || 0) / element.tache_array.length) * 100
-                        element.buffer = element.progression + ((element.tache_en_cours.length || 0) / element.tache_array.length) * 100
-                        if (element.tache_array.length > 3) {
-                            element.tache_array = element.tache_array.splice(0, 3)
-                        }
-                    })
-                    this.projets = res.data
-                    this.dataDialog = false
-                    this.loading = false
+                this.projets = projets
+                this.dataDialog = false
+                this.loading = false
+            });
 
-                })
-                .catch(err => {
-                    if (err.message == "Network Error") {
-                        setTimeout(() => {
-                            this.text = "impossible de se connecter au server!"
-                            this.loading = false
-
-                        }, 5000)
-                    }
-
-                    console.dir(err)
-                })
         }
     },
     created() {
-        this.getTasks()
-        setTimeout(() => {
-            this.getProjects()
-        }, 120)
-        // while (this.taches) {
-        //     if (this.taches.length) {
-        //         this.getProjects()
-
-        //         break
-        //     }
-        // }
+        this.initializeData()
     },
 
 }

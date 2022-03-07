@@ -50,14 +50,11 @@ export default {
 
     data: () => ({}),
     created() {
-        console.log(this.ug_c)
         axios
             .post(this.authAPI + "token-verify/", {
-                token: this.ug_c,
+                token: this.ug_c.token,
             })
-            .then()
             .catch(err => {
-                console.log(location.href)
                 if (err.response.status == "400") {
                     if (location.href == location.origin + '/auth') {
                         return

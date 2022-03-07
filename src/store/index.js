@@ -9,11 +9,13 @@ export default new Vuex.Store({
     ug_c: null
   },
   mutations: {
-    saveUG_C(state, value) {
+    saveUser(state, value) {
       state.ug_c = value
     },
-    resetUG_C(state) {
-      state.ug_c = null
+    resetToken(state) {
+      if (state.ug_c != null)  {
+        state.ug_c.token = null
+      }
     },
 
   },
