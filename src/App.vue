@@ -25,9 +25,9 @@ Vue.mixin({
     //authAPI: "http://127.0.0.1:8000/auth/",
     //dataAPI: "http://127.0.0.1:8000/projets/",
     //docAPI: "http://127.0.0.1:8000/docs.json",
-    authAPI: "http://192.168.43.151:8000/auth/",
-    dataAPI: "http://192.168.43.151:8000/projets/",
-    docAPI: "http://192.168.43.151:8000/docs.json",
+    authAPI: "http://192.168.43.108:8000/auth/",
+    dataAPI: "http://192.168.43.108:8000/projets/",
+    docAPI: "http://192.168.43.108:8000/docs.json",
   }),
   computed: {
     ug_c() {
