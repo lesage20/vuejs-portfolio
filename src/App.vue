@@ -8,7 +8,7 @@
       </v-card>
     </v-dialog>
     <navbar />
-    <v-main class="grey lighten-3">
+    <v-main class="info lighten-3">
       <v-fade-transition hide-on-leave origin="center center" appear>
         <router-view />
       </v-fade-transition>

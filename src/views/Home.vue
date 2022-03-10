@@ -1,86 +1,113 @@
 <template>
   <v-container>
-    <div class="catalogue">
-      <VLabel label="Ressources employées" />
-      <v-row class="mb-5 lg-px-5">
-        <v-col
-          lg="6"
-          md="6"
-          cols="12"
-          v-for="detail in ressources"
-          :key="detail.nom"
-        >
-          <v-card elevation="2" class="rounded-lg">
-            <v-card-text class="d-flex justify-space-between align-center">
-              <div class="">
-                <strong> {{ detail.nom }} </strong> <br />
-                <small>{{ detail.valeur }}</small>
-              </div>
-              <v-avatar v-if="detail.index == 2" size="100">
-                <v-img :src="detail.logo"></v-img>
-              </v-avatar>
-              <v-avatar v-else class="secondary" size="100">
-                <span
-                  v-if="detail.index == 1"
-                  class="white--text font-weight-medium"
-                  >{{ detail.pourcentage }}% <br />
-                  consommé</span
-                >
-                <span
-                  v-if="detail.index == 3"
-                  class="white--text font-weight-medium"
-                  >effectif <br />
-                  {{ detail.effectif }}</span
-                >
-              </v-avatar>
+    <v-row class="my-4" justify="space-around">
+      <v-col
+        v-for="i in Dash_items_row_1"
+        :key="i.titre"
+        md="6"
+        lg="4"
+        sm="12"
+        cols="12"
+      >
+        <v-responsive aspect-ratio="4/3">
+          <v-card class="info lighten-2 px-1 text-center py-10">
+            <v-img aspect-ratio="1.77" class="mx-auto" :src="i.image"></v-img>
+            <v-card-text class="title font-weight-bold pt-8">
+              <v-btn flat class="secondary">
+                {{ i.titre }}
+              </v-btn>
             </v-card-text>
           </v-card>
-        </v-col>
-      </v-row>
-      <v-alert
-        text
-        class="text-center mt-3 title"
-        icon="mdi-format-list-checks"
-        prominent
-        color="primary lighten-3"
-      >
-        Cahier de charges et avancée du projet
-      </v-alert>
+        </v-responsive>
+      </v-col>
+    </v-row>
 
-      <TimeLine />
-    </div>
+    <v-row>
+      <v-col cols="12" sm="12" md="9">
+        <v-row justify="space-around" class="text--center">
+          <v-col
+            v-for="i in Dash_items_row_2"
+            :key="i.titre"
+            cols="12"
+            lg="4"
+            md="6"
+          >
+            <v-responsive aspect-ratio="1.66">
+              <v-card flat class="info lighten-2 px-1 pt-5 text-center">
+                <v-img
+                  :max-height="90"
+                  :max-width="100"
+                  class="mx-auto"
+                  :src="i.image"
+                ></v-img>
+                <v-card-text class="secondary--text">
+                  <v-avatar class="mb-1" color="info lighten-3" size="36">
+                    <span class="text-h6">{{ i.effectif }}</span>
+                  </v-avatar>
+                  <br />
+                  <span> {{ i.titre }}</span>
+                </v-card-text>
+              </v-card>
+            </v-responsive>
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col cols="12" md="3">
+        <v-card class="accent"> <v-card-text>hjgdgd</v-card-text></v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <script>
-// import SliderCarouselle from "@/components/SliderCarouselle.vue";
-import TimeLine from "@/components/TimeLine.vue";
-import VLabel from "@/components/Label.vue";
 export default {
   name: "DashBoard",
-  components: {
-    // SliderCarouselle,
-    TimeLine,
-    VLabel,
-  },
+  components: {},
   data: () => ({
-    ressources: [
+    Dash_items_row_1: [
       {
-        index: 1,
-        nom: "Budget",
-        valeur: "200 300 FCFA",
-        pourcentage: "20",
+        titre: "Mes clients",
+        image: "/images/undraw_meeting_re_i53h.svg",
       },
       {
-        index: 2,
-        nom: "Chef de Projet",
-        valeur: "Koffi-BAT",
-        logo: "/images/Logo IEA-02.png",
+        titre: "Mes projets",
+        image: "/images/undraw_growth_analytics_re_pyxf.svg",
+      },
+
+      {
+        titre: "Mes informations",
+        image: "/images/undraw_profile_re_4a55.svg",
+      },
+    ],
+    Dash_items_row_2: [
+      {
+        titre: "Projets terminés",
+        image: "/images/undraw_check_boxes_re_v40f.svg",
+        effectif: "2",
       },
       {
-        index: 3,
-        nom: "Maitre d'oeuvre",
-        valeur: "Bnet",
-        effectif: "600",
+        titre: "Projets en cours",
+        image: "/images/undraw_problem_solving_re_4gq3.svg",
+        effectif: "3",
+      },
+      {
+        titre: "Projets en attente",
+        image: "/images/undraw_to_do_list_re_9nt7.svg",
+        effectif: "4",
+      },
+      {
+        titre: "xxxxx",
+        image: "/images/undraw_checklist__re_2w7v.svg",
+        effectif: "xx",
+      },
+      {
+        titre: "xxxxx",
+        image: "/images/undraw_checklist__re_2w7v.svg",
+        effectif: "xx",
+      },
+      {
+        titre: "xxxxx",
+        image: "/images/undraw_checklist__re_2w7v.svg",
+        effectif: "xx",
       },
     ],
   }),
