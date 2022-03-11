@@ -11,7 +11,7 @@
     </v-dialog>
     <v-row>
       <v-col>
-        <v-card dark elevation="0" class="curved">
+        <v-card dark elevation="0" class="primary darken-1 curved">
           <h1 class="text-center my-auto py-auto">
             {{ projet.nom }}
           </h1>
@@ -26,18 +26,18 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <v-label label="Quelques chiffres utiles" />
+        <v-label icon="mdi-chart-bar" label="Quelques chiffres utiles" />
       </v-col>
 
       <v-col lg="3" md="6" sm="6" cols="12" class="mt-xs-4">
-        <v-card dark elevation="0" color="success darken-1">
+        <v-card dark elevation="0" color="degrade1">
           <v-row justify="center">
-            <v-col class="curved mx-3">
+            <v-col class="curved primary darken-1 mx-3">
               <v-row>
                 <v-col>
                   <v-sheet
                     class="rounded-circle text-center"
-                    color="success"
+                    color="degrade1"
                     :height="50"
                     :width="50"
                     style="margin-top: -5px; margin-left: -5px"
@@ -57,14 +57,14 @@
         </v-card>
       </v-col>
       <v-col lg="3" md="6" sm="6" cols="12" class="mt-xs-4">
-        <v-card dark elevation="0" color="warning darken-1">
+        <v-card dark elevation="0" color="degrade2">
           <v-row justify="center">
-            <v-col class="curved mx-3">
+            <v-col class="curved primary darken-1 mx-3">
               <v-row>
                 <v-col>
                   <v-sheet
                     class="rounded-circle text-center"
-                    color="warning"
+                    color="degrade2"
                     :height="50"
                     :width="50"
                     style="margin-top: -5px"
@@ -84,14 +84,14 @@
         </v-card>
       </v-col>
       <v-col lg="3" md="6" sm="6" cols="12" class="mt-xs-4">
-        <v-card dark elevation="0" color="error darken-1">
+        <v-card dark elevation="0" color="degrade3">
           <v-row justify="center">
-            <v-col class="curved mx-3">
+            <v-col class="curved primary darken-1 mx-3">
               <v-row>
                 <v-col>
                   <v-sheet
                     class="rounded-circle text-center"
-                    color="error"
+                    color="degrade3"
                     :height="50"
                     :width="50"
                     style="margin-top: -5px"
@@ -113,7 +113,7 @@
       <v-col lg="3" md="6" sm="6" cols="12" class="mt-xs-4">
         <v-card dark elevation="0" color="primary  darken-1">
           <v-row justify="center">
-            <v-col class="curved mx-3">
+            <v-col class="curved primary darken-1 mx-3">
               <v-row>
                 <v-col>
                   <v-sheet
@@ -142,18 +142,19 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <v-label label="Liste de tâches selon le statut" />
+        <v-label
+          icon="mdi-clipboard-list-outline"
+          label="Liste de tâches selon le statut"
+        />
       </v-col>
       <v-col class="my-0 py-0">
         <v-card>
           <v-tabs v-model="tab">
             <v-tabs-slider></v-tabs-slider>
 
-            <v-tab href="#terminée"> Terminées </v-tab>
-
-            <v-tab href="#en-cours"> En cours </v-tab>
-
-            <v-tab href="#en-attente"> En attente </v-tab>
+            <v-tab class="white--text mr-3 degrade1" href="#terminée"> Terminées </v-tab>
+            <v-tab class="white--text mr-3 degrade2" href="#en-cours"> En cours </v-tab>
+            <v-tab class="white--text mr-3 degrade3" href="#en-attente"> En attente </v-tab>
           </v-tabs>
 
           <v-tabs-items v-model="tab">
@@ -273,9 +274,9 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row class="mt-10">
       <v-col cols="12">
-        <v-label label="Timeline exprimant l'avancée du projet" />
+        <v-label icon="mdi-chart-gantt" label="Timeline exprimant l'avancée du projet" />
       </v-col>
       <v-col cols="12">
         <time-line :items="taches" />
@@ -435,7 +436,7 @@ export default {
 <style>
 .curved {
   position: relative;
-  background: #2c3e50 !important;
+  background: #2c3e50;
   height: 10vh;
   border-bottom-left-radius: 50% 20% !important;
   border-bottom-right-radius: 50% 20% !important;

@@ -1,5 +1,5 @@
 <template>
-<v-alert dense  text :icon="icon" color="success">
+<v-alert dense prominent text :icon="icon" color="accent">
     <strong> {{label}}</strong>
 </v-alert>
 </template>

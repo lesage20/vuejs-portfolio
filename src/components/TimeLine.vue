@@ -31,9 +31,9 @@ export default {
   },
   methods: {
     color(item) {
-      if (item.status == "terminée") return "success";
-      else if (item.status == "en cours") return "warning";
-      if (item.status == "en attente") return "pink";
+      if (item.status == "terminée") return "degrade1";
+      else if (item.status == "en cours") return "degrade2";
+      if (item.status == "en attente") return "degrade3";
     },
     itemsByStatus() {
       console.log("items avant tri: \n", this.items);
