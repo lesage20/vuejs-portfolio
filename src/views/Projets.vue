@@ -1,5 +1,5 @@
 <template>
-  <v-container class="grey lighten-3" :fill-height="loading">
+  <v-container class="info lighten-3" :fill-height="loading">
     <v-row justify="center" align="center" class="py-auto my-auto">
       <v-col md="12" lg="8" cols="12" class="my-0 py-0">
         <v-text-field
@@ -14,7 +14,7 @@
         ></v-text-field>
       </v-col>
       <v-col md="12" lg="12truc" cols="12" class="my-0 py-0">
-        <v-card color="grey lighten-3 " flat v-if="!loading">
+        <v-card color="info lighten-3 " flat v-if="!loading">
           <v-card-subtitle class="mx-lg-16 py-0">
             Liste de projets
           </v-card-subtitle>
@@ -31,7 +31,7 @@
                   v-for="(projet, i) in displayedProjects"
                   :key="i"
                 >
-                  <v-card>
+                  <v-card class="info lighten-3">
                     <v-card-title>
                       <v-row justify="space-between" class="px-4">
                         <h5>{{ projet.nom }}</h5>
@@ -43,10 +43,10 @@
                       </v-row>
                     </v-card-title>
 
-                    <v-card-text>
-                      <v-list three-line>
+                    <v-card-text >
+                      <v-list class="info lighten-3" three-line>
                         <template v-for="item in projet.tache_array">
-                          <v-list-item :key="item.titre">
+                          <v-list-item class="info lighten-3" :key="item.titre">
                             <v-list-item-content>
                               <v-list-item-title
                                 v-html="item.titre"
@@ -88,15 +88,15 @@
 
                       <div class="mt-2">
                         <v-row justify="space-between" class="my-1 px-4">
-                          <h4 class="d-flex success--text">
+                          <h4 class="d-flex degrade1--text">
                             {{ Math.floor(projet.progression) }}% Terminée
                           </h4>
-                          <h4 class="d-flex warning--text">
+                          <h4 class="d-flex degrade2--text">
                             {{
                               Math.floor(projet.buffer - projet.progression)
                             }}% En cours
                           </h4>
-                          <h4 class="d-flex">
+                          <h4 class="degrade3--text d-flex">
                             {{ Math.floor(100 - projet.buffer) }}% En attente
                           </h4>
                         </v-row>
@@ -105,8 +105,8 @@
                           stream
                           :buffer-value="projet.buffer"
                           rounded
-                          color="success"
-                          background-color="warning lighten-3"
+                          color="degrade1"
+                          background-color="degrade2"
                           strip
                           :value="projet.progression"
                         ></v-progress-linear>
@@ -218,15 +218,15 @@
 
                       <div class="mt-2">
                         <v-row justify="space-between" class="my-1 px-4">
-                          <h4 class="d-flex success--text">
+                          <h4 class="d-flex degrade1--text">
                             {{ Math.floor(projet.progression) }}% Terminée
                           </h4>
-                          <h4 class="d-flex warning--text">
+                          <h4 class="d-flex degrade2--text">
                             {{
                               Math.floor(projet.buffer - projet.progression)
                             }}% En cours
                           </h4>
-                          <h4 class="d-flex">
+                          <h4 class="degrade3--text d-flex">
                             {{ Math.floor(100 - projet.buffer) }}% En attente
                           </h4>
                         </v-row>
@@ -235,7 +235,7 @@
                           stream
                           :buffer-value="projet.buffer"
                           rounded
-                          color="success"
+                          color="degrade2"
                           background-color="warning lighten-3"
                           strip
                           :value="projet.progression"
@@ -345,9 +345,9 @@ export default {
       );
     },
     chipColor(status) {
-      if (status == "en attente") return "error";
-      if (status == "en cours") return "warning";
-      if (status == "terminée") return "success";
+      if (status == "en attente") return "degrade3";
+      if (status == "en cours") return "degrade2";
+      if (status == "terminée") return "degrade1";
     },
     getTasks() {
       axios
