@@ -59,7 +59,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="12" md="9">
+      <v-col>
         <v-row justify="space-around" class="text--center">
           <v-col
             v-for="i in Dash_items_row_2"
@@ -87,9 +87,6 @@
             </v-responsive>
           </v-col>
         </v-row>
-      </v-col>
-      <v-col cols="12" md="3">
-        <v-card class="accent"> <v-card-text>hjgdgd</v-card-text></v-card>
       </v-col>
     </v-row>
   </v-container>

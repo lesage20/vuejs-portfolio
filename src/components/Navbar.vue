@@ -3,6 +3,10 @@
     <v-app-bar app color="primary rounded-0" dense dark flat>
       <v-app-bar-nav-icon @click="draw = true"></v-app-bar-nav-icon>
       <v-app-bar-title class="text-uppercase"> SageCoders </v-app-bar-title>
+      <v-spacer></v-spacer>
+      <v-btn class="primary" text flat @click="logout">
+        <v-icon small left>mdi-logout</v-icon> Deconnexion
+      </v-btn>
     </v-app-bar>
     <template v-if="$route.name != 'Auth'">
       <v-navigation-drawer
@@ -37,13 +41,13 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
-        <template v-slot:append>
+        <!-- <template v-slot:append>
           <div class="pa-2">
             <v-btn block @click="logout">
               <v-icon small left>mdi-logout</v-icon> Deconnexion
             </v-btn>
           </div>
-        </template>
+        </template> -->
       </v-navigation-drawer>
     </template>
   </v-card>
