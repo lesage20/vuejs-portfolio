@@ -17,7 +17,7 @@
             </v-avatar>
           </v-col>
           <v-col cols="12" md="9" sm="12">
-            <v-card flat>
+            <v-card flat color="info lighten-3">
               <v-card-title class="accent--text text-md-h4">
                 {{ i.nom }}
               </v-card-title>
