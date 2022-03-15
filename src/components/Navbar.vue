@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-app-bar app color="primary rounded-0" dense dark flat>
-      <v-app-bar-nav-icon @click="draw = true"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="draw = !draw"></v-app-bar-nav-icon>
       <v-app-bar-title class="text-uppercase"> SageCoders </v-app-bar-title>
       <v-spacer></v-spacer>
       <v-btn class="primary" text flat @click="logout">
@@ -9,13 +9,7 @@
       </v-btn>
     </v-app-bar>
     <template v-if="$route.name != 'Auth'">
-      <v-navigation-drawer
-        dark
-        v-model="draw"
-        app
-        :permanent="!isMobile"
-        color="primary  rounded-0 "
-      >
+      <v-navigation-drawer dark v-model="draw" app color="primary  rounded-0 ">
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title class="text-h6"> SageCoders </v-list-item-title>
@@ -87,7 +81,7 @@ export default {
         to: "/auth",
       },
     ],
-    draw: false,
+    draw: true,
     right: null,
   }),
   methods: {

@@ -311,7 +311,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Dashboard",
+  name: "Projets",
   data: () => ({
     search: "",
     projets: [],

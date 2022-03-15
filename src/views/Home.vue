@@ -36,15 +36,7 @@
           Liste des projets
         </v-card-title>
         <v-card-text class="pa-5">
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi
-            deserunt dolorem voluptatum quos autem neque incidunt expedita rem
-            ducimus, aperiam accusamus similique quis, ab dolore laboriosam,
-            doloribus aliquam praesentium cupiditate. Lorem ipsum, dolor sit
-            amet consectetur adipisicing elit. Autem fuga animi asperiores nisi
-            praesentium. Quae mollitia optio minima aliquid maiores, cupiditate
-            temporibus recusandae cumque vero ipsam fugiat aut, molestiae natus.
-          </p>
+          <p>{{ projets }}</p>
           <!-- <v-list>
             <v-list-item v-for="i in listProjets" :key="i.nom">
               <span>Nom du projet: </span> {{ i.nom }}
@@ -131,9 +123,9 @@
   </v-container>
 </template>
 <script>
-//import axios from "axios";
+import axios from "axios";
 export default {
-  name: "DashBoard",
+  name: "Home",
   components: {},
   data: () => ({
     dialog: false,
@@ -187,6 +179,23 @@ export default {
       },
     ],
   }),
-  methods: {},
+  methods: {
+    recupProjet() {
+      axios
+        .get(this.dataAPI + "projets/", {
+          headers: { Authorization: "Bearer " + this.ug_c.token },
+        })
+        .then((response) => {
+          this.projets = response.data;
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.dir(err);
+        });
+    },
+  },
+  created() {
+    this.recupProjet();
+  },
 };
 </script>
